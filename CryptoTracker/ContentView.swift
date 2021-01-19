@@ -38,6 +38,7 @@ struct ContentView: View {
                         self.AuthentificationFailed = false
                     } else {
                         self.AuthentificationFailed = true
+                        self.AuthentificationSucced = false
                     }
                 }) {
                     LoginButton()
