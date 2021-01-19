@@ -44,16 +44,17 @@ struct ContentView: View {
                     LoginButton()
                 }
             }
-        .padding()
-        if AuthentificationSucced {
-            Text("Login Succeeded!")
-                .font(.subheadline)
-                .frame(width: 200, height: 30)
-                .background(Color.green)
-                .cornerRadius(20)
-                .animation(Animation.default)
+            .padding()
+            if AuthentificationSucced {
+                Text("Login Succeeded!")
+                    .font(.subheadline)
+                    .frame(width: 200, height: 30)
+                    .background(Color.green)
+                    .cornerRadius(20)
+                    .animation(Animation.default)
+            }
         }
-        }
+        .background(Image("blockchainbkg"))
     }
 }
 
@@ -69,6 +70,7 @@ struct WelcomeHeader: View {
     var body: some View {
         Text("Hello!\nWelcome to CryptoTracker")
             .font(.title)
+            .foregroundColor(.white)
             .fontWeight(.semibold)
             .multilineTextAlignment(.center)
             .padding(.bottom, 20)
