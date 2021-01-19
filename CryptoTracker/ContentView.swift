@@ -9,20 +9,50 @@ import SwiftUI
 
 let LightGreyColor = Color(red: 239.0/255.0, green: 243.0/255.0, blue: 244.0/255.0)
 
+let SavedUsername = "Tanguy"
+let SavedPassword = "RugbyproTB-69"
+
 struct ContentView: View {
+    
     @State var username: String = ""
     @State var password: String = ""
+    
+    @State var AuthentificationFailed: Bool = false //auth is false by default and become true if failed
+    @State var AuthentificationSucced: Bool = false
+    
     var body: some View {
-        VStack {
-            WelcomeHeader()
-            AppImage()
-            UsernameField(username: $username)
-            PasswordField(password: $password)
-            Button(action:  {print("Button tapped")}) {
-                LoginButton()
+        ZStack {
+            VStack {
+                WelcomeHeader()
+                AppImage()
+                UsernameField(username: $username)
+                PasswordField(password: $password)
+                if AuthentificationFailed {
+                    Text("Informations incorrect. Try again.")
+                        .foregroundColor(.red)
+                }
+                
+                Button(action: {
+                    if self.username == SavedUsername && self.password == SavedPassword {
+                        self.AuthentificationSucced = true
+                        self.AuthentificationFailed = false
+                    } else {
+                        self.AuthentificationFailed = true
+                    }
+                }) {
+                    LoginButton()
+                }
             }
+        .padding()
+        if AuthentificationSucced {
+            Text("Login Succeeded!")
+                .font(.subheadline)
+                .frame(width: 200, height: 30)
+                .background(Color.green)
+                .cornerRadius(20)
+                .animation(Animation.default)
         }
-    .padding()
+        }
     }
 }
 
@@ -49,10 +79,10 @@ struct AppImage: View {
         Image("AppLogo")
             .resizable()
             .aspectRatio(contentMode: /*@START_MENU_TOKEN@*/.fill/*@END_MENU_TOKEN@*/)
-            .frame(width: 150, height:150)
+            .frame(width: 140, height:140)
             .clipped()
             .cornerRadius(150)
-            .padding(.bottom, 20)
+            .padding(.bottom, 50)
     }
 }
 
